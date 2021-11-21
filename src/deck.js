@@ -16,25 +16,20 @@ const VALUES = [
   'Q',
   'K',
 ];
-
 export default class Deck {
   // eslint-disable-next-line no-use-before-define
   constructor(cards = freshDeck()) {
     this.cards = cards;
   }
-
   get numberOfCards() {
     return this.cards.length;
   }
-
   pop() {
     return this.cards.shift();
   }
-
   push(card) {
     this.cards.push(card);
   }
-
   shuffle() {
     for (let i = this.numberOfCards - 1; i > 0; i -= 1) {
       const newIndex = Math.floor(Math.random() * (i + 1));
@@ -44,23 +39,28 @@ export default class Deck {
     }
   }
 }
-
 class Card {
   constructor(suit, value) {
     this.suit = suit;
     this.value = value;
   }
-
   get color() {
     return this.suit === '♣' || this.suit === '♠' ? 'black' : 'red';
   }
+  getSuit() {
+    return this.suit;
+  }
 
-  getHTML() {
+  getElement() {
     const cardDiv = document.createElement('div');
     cardDiv.innerText = this.suit;
     cardDiv.classList.add('card', this.color);
     cardDiv.dataset.value = `${this.value} ${this.suit}`;
     return cardDiv;
+  }
+
+  getHTML() {
+    return this.getElement().outerHTML;
   }
 }
 
